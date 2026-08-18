@@ -226,6 +226,13 @@
   }
   document.getElementById('gatePin').addEventListener('keydown', e=>{ if(e.key==='Enter') checkGate(); });
 
+  function toLocalDateStr(d){
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth()+1).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
   function dateKey(v){
     const s = String(v);
     if(s.includes('T')){
@@ -268,8 +275,8 @@
     } else if(preset === 'month'){
       from.setDate(1);
     }
-    document.getElementById('fromDate').value = from.toISOString().slice(0,10);
-    document.getElementById('toDate').value = today.toISOString().slice(0,10);
+    document.getElementById('fromDate').value = toLocalDateStr(from);
+    document.getElementById('toDate').value = toLocalDateStr(today);
     loadDashboard();
   }
 
