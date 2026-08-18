@@ -226,7 +226,17 @@
   }
   document.getElementById('gatePin').addEventListener('keydown', e=>{ if(e.key==='Enter') checkGate(); });
 
-  function dateKey(v){ return String(v).slice(0,10); }
+  function dateKey(v){
+    const s = String(v);
+    if(s.includes('T')){
+      const d = new Date(s);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const dd = String(d.getDate()).padStart(2,'0');
+      return `${yyyy}-${mm}-${dd}`;
+    }
+    return s.slice(0,10);
+  }
 
   function categorize(name){
     if(name.indexOf('Full Wash') === 0) return 'fullwash';
